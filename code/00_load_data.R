@@ -2,6 +2,8 @@ here::i_am("code/00_load_data.R")
 
 library(here)
 library(readxl)
+library(dplyr)
+library(tidyverse)
 
 # Lodad data
 data <- read_excel(here("raw_data", "IHME_GBD_2021_MORTALITY.XLSX"), skip=1)
@@ -27,4 +29,4 @@ long_data <- data %>%
 # Set the colors
 my_colors <- colorRampPalette(RColorBrewer::brewer.pal(8, "Set2"))(15)
 
-saveRDS(long_data, file = here::here("output/data_clean.rds"))
+saveRDS(long_data, file = here::here("output/clean_data.rds"))

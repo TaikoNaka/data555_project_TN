@@ -1,0 +1,55 @@
+---
+title: "DATA 550 Midterm Project"
+author: "Oceanus, Taiko, Zak"
+output: html_document
+---
+# SARS-CoV-2 concentrations in wastewater samples in the United States
+
+We analyzed the CDC Wastewater Surveillance Data. This dataset provides historical SARS-CoV-2 concentrations in wastewater samples from locations across the United States, which can be used to understand regional trends in viral spread over time.
+Data source: NWSS Public SARS-CoV-2 Wastewater Metric DataLinks to an external site.
+
+## Temporal trends in national-level viral load
+
+```{r, echo=FALSE, fig.align="center", out.width="90%"}
+knitr::include_graphics(here::here("output", "national_trend_plot.png"))
+```
+
+## Viral concentration by states
+
+```{r, echo=FALSE, fig.align="center", out.width="90%"}
+
+state_avg <- base::readRDS(here::here("output", "state_avg.rds"))
+
+knitr::kable(state_avg)
+```
+
+## Top 10 regions with the highest average viral concentrations
+
+```{r, echo=FALSE, fig.align="center", out.width="90%"}
+top10 <- base::readRDS(here::here("output", "top10_counties.rds"))
+
+knitr::kable(top10)
+```
+
+## Dot plot of the viral concentration by states
+
+```{r, echo=FALSE, fig.align="center", out.width="90%"}
+knitr::include_graphics(here::here("output", "regional_dotplot.png"))
+```
+
+## Viral Load Trends by Population Size
+
+This section explores how SARS-CoV-2 viral concentrations vary based on the population served by each wastewater treatment plant.
+
+```{r load-population-trend-plot, echo=FALSE, fig.align="center", out.width="90%"}
+knitr::include_graphics(here::here("output", "viral_load_trend_by_population.png"))
+```
+
+The plot above displays average viral load percentiles across time for small, medium, and large population groups. Using percentiles helps standardize comparisons between wastewater sites. Larger populations tend to show more stable trends, while small communities show more fluctuation, possibly due to limited sample size or system variability.
+
+## Comparison of Viral Load by Population Group
+
+This boxplot shows how viral load percentiles appear similar across small, medium, and large population groups. While median viral load levels are quite similar across the three, small communities have a wider spread of values — potentially due to fluctuations in local transmission or limited population buffering effects in smaller systems.
+
+```{r compare-population-boxplot, echo=FALSE, fig.align="center", out.width="90%"}
+knitr::include_graphics(here::here("output", "population_group_comparison.png"))

@@ -1,0 +1,104 @@
+---
+title: "Global Trends and Distribution of Cancer Mortality"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: column
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(knitr)
+library(here)
+library(htmltools)
+
+```
+
+
+# Global Cancer Mortality Trends (1990-2021)
+
+column {data-width=750}
+-------------------------------------
+
+### Global Mortality Trends by Cancer Type
+
+```{r, echo=FALSE}
+
+line_chart <- readRDS(here::here("output", "line_chart.rds"))
+line_chart
+
+```
+
+column {data-width=250}
+-------------------------------------
+
+### Key points
+
+- Mortality rates have declined over time for most cancer types.
+- Mortality rates have increased slightly for pancreatic cancer from 1990 to 2020. 
+- For stomac cancer, mortality rates halved from 1990 to 2020.
+
+
+# Regional Cancer Mortality Distribution (2021)
+
+column {data-width=750}
+-------------------------------------
+
+### Regional Distribution of Cancer Mortality (2021)
+
+```{r, echo=FALSE}
+boxplot_chart <- readRDS(here::here("output", "plot.rds"))
+boxplot_chart
+```
+
+```{r, echo=FALSE, results='asis'}
+cat('
+<style>
+  body {
+    padding-bottom: 60px;
+  }
+</style>
+')
+
+cat('
+<style>
+  .footer-note {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    color: #444;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    border-top: 1px solid #ccc;
+    z-index: 1000;
+  }
+</style>
+<div class="footer-note">
+  Understanding global and regional disparities in cancer mortality can guide resource allocation and health policy. 
+  This dashboard supports evidence-based cancer control planning at both global and local levels.
+</div>
+')
+```
+
+
+column {data-width=250}
+-------------------------------------
+
+### Key points
+
+- Differences in mortality rates by region vary widely by type of cancer.
+- Tracheal, bronchus, and lung cancers have very large regional differences in mortality. 
+- Renal and liver cancers have low overall mortality rates and relatively few regional differences.
+
+
+# Data Source
+
+column 
+-------------------------------------
+
+This project uses the Global Burden of Disease (GBD) 2022 study datasets, provided by the Institute for Health Metrics and Evaluation (IHME). It includes disease mortality rates across countries, and regions in both sexes from 1990 to 2021. The estimates are derived from official death registries, hospital records, and population surveys, ensuring comprehensive global coverage. Key variables include mortality rates per 100,000 population in both sexes, categorized by disease and by 204 countries and territories and 811 subnational locations.
+
+Institute for Health Metrics and Evaluation. (2025, April, 1). Global Burden of Disease Study 2021 (GBD 2021) Cause-Specific Mortality 1990-2021. https://ghdx.healthdata.org/record/ihme-data/gbd-2021-cause-specific-mortality-1990-2021

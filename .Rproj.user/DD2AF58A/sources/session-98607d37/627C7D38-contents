@@ -3,7 +3,7 @@
 all: render_report
 
 ## output/clean_data.rds: Cleaned data loaded from source
-output/data_clean.rds: code/00_load_data.R data/raw_data.csv
+output/clean_data.rds: code/00_load_data.R raw_data/IHME_GBD_2021_MORTALITY.xlsx
 	Rscript code/00_load_data.R
 
 ## output/chart_summary.rds: Table/chart summary output
@@ -14,9 +14,9 @@ output/line_chart.rds: code/01_make_chart.R output/clean_data.rds
 output/plot.png: code/02_make_plot.R output/clean_data.rds
 	Rscript code/02_make_plot.R
 
-## report.html: Final rendered report
-report.html: code/03_render_report.R \
-  report_template.Rmd output/chart_summary.rds output/plot.png
+## global_cancer_dashboard.html: Final rendered flexdashboard
+global_cancer_dashboard.html: code/03_render_report.R \
+  global_cancer_dashboard.Rmd output/line_chart.rds output/plot.png
 	Rscript code/03_render_report.R
 
 .PHONY: load_data
@@ -33,12 +33,12 @@ make_plot: output/plot.png
 
 .PHONY: render_report
 ## render_report: Only render the final report
-render_report: report.html
+render_report: global_cancer_dashboard.html
 
 .PHONY: clean
 ## clean: Remove all generated output files
 clean:
-	rm -f output/*.rds output/*.png report.html
+	rm -f output/*.rds output/*.png *.html
 
 .PHONY: help
 ## help: Show help for each target
