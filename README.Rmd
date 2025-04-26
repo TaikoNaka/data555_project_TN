@@ -1,0 +1,26 @@
+---
+title: "README"
+output: html_document
+---
+
+# Final Report Project
+
+## Overview
+
+This project uses the Global Burden of Disease study 2021 (GBD 2021) datasets, provided by the Institute for Health Metrics and Evaluation (IHME), to examine trends in cancer mortality rates in the world. The study focuses on two perspectives: (1) global temporal trends in cancer mortality from 1990 to 2021, and (2) regional variation in cancer mortality in 2021.
+
+By visualizing mortality rates by cancer type over time and across different regions, this analysis aims to assess long-term trends in mortality rates across major cancer types globally, and highlight the geographical disparities in the global cancer burden. This information generates insights that can inform global and regional cancer control strategies.
+
+## Files and Directories
+
+- `raw_data/`: Contains the raw dataset (CSV file).
+- `code/`: Contains the R scripts for data processing, table creation, plot generation, and report rendering.
+- `output/`: Contains intermediate and final output files (processed data, plots, and the HTML report).
+- `final_project.Rmd`: R Markdown file for report generation.
+
+## Installation
+To run the project, ensure the following R packages are installed:
+
+```R
+install.packages(c("here", "readxl", "stringr", flexdashboard", "tidyverse", "plotly", ))
+```
